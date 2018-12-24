@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.connext.mapper.LoginTestMapper">
+	<resultMap type="Logintest" id="LoginMap">
+		<result column="phone" property="phone" />
+		<result column="logintime" property="logintime" />
+	</resultMap>
+
+	<insert id="loginTime" parameterType="LoginTest">
+		insert into logintest (phone,logintime) values (#{phone},#{logintime})
+	</insert>
+
+	<select id="countLogin" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(phone) from logintest where logintime between date_add(now(), interval - 5 minute) and now() and phone=#{phone}
+	</select>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.connext.mapper.MessageMapper">
+	<resultMap type="Message" id="MessageMap">
+		<id column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="date" property="date" />
+		<result column="content" property="content" />
+	</resultMap>
+
+	<delete id="delete" parameterType="Integer">
+		delete from message where id=#{id}
+	</delete>
+
+	<select id="queryAll" resultMap="MessageMap">
+		select title,date,content,id from message
+	</select>
+
+	<select id="queryById" resultMap="MessageMap" parameterType="Integer">
+		select title,date,content,id from message where id=#{id}
+	</select>
+
+	<update id="updateById" parameterType="Message">
+		update message set content=#{content},title=#{title},date=#{date} where
+		id=#{id}
+	</update>
+
+</mapper>
